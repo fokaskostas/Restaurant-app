@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.css') }}">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/styles.css') }}">
+		<script src="{{ url_for('static', filename='js/jquery-3.2.1.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	</head>
+	<body>
+		<div class="container text-center">
+			<h1>Are you sure you want to delete {{restaurant.name}}?</h1>
+			<form action="{{ url_for('deleteRestaurant', restaurant_id=restaurant.id) }}" method = 'POST'>
+				<input type='submit' value='Delete'>
+			</form>
+			<a href="{{ url_for('showRestaurants') }} ">Cancel</a>
+		</div>
+	</body>
+</html>

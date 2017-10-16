@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.css') }}">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/styles.css') }}">
+		<script src="{{ url_for('static', filename='js/jquery-3.2.1.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	</head>
+	<body>
+		<div class="container text-center">
+		<h1 class="title-super text-uppercase">{{ restaurant.name }} menu</h1></br>
+
+		<div class="row">
+            <div class="col-md-12">
+          		<img class= "img-responsive" src="{{ url_for('static', filename='images/menu.jpg') }}" alt="Main Image"></br>
+        	</div>
+      	</div>
+
+		<a href="{{ url_for('newMenuItem', restaurant_id = restaurant_id)}}">Create New Item</a></br></br>
+
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<ul>
+		{% for message in messages %}
+		<li><strong>{{message}}</strong></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+		{% endwith %}
+
+		<h2>Appetizers</h2>
+			{% for i in items %}
+				{% if i.course == 'Appetizer' %}
+					{{i.name}}<br>
+		    		{{i.description}}<br>
+		    		{{i.price}}<br>
+		    		<a href= "{{ url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=i.id)}}">Edit</a></br>
+					<a href= "{{ url_for('deleteMenuItem', restaurant_id=restaurant_id, menu_id=i.id)}}">Delete</a></br></br>
+		    	{% endif %}
+		    {% endfor %}
+		    </br>
+
+		<h2>Entrees</h2>
+			{% for i in items %}
+				{% if i.course == 'Entree' %}
+					{{i.name}}<br>
+		    		{{i.description}}<br>
+		    		{{i.price}}<br>
+		    		<a href= "{{ url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=i.id)}}">Edit</a></br>
+					<a href= "{{ url_for('deleteMenuItem', restaurant_id=restaurant_id, menu_id=i.id)}}">Delete</a></br></br>
+		    	{% endif %}
+		    {% endfor %}
+
+		<h2>Desserts</h2>
+			{% for i in items %}
+				{% if i.course == 'Dessert' %}
+					{{i.name}}<br>
+		    		{{i.description}}<br>
+		    		{{i.price}}<br>
+		    		<a href= "{{ url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=i.id)}}">Edit</a></br>
+					<a href= "{{ url_for('deleteMenuItem', restaurant_id=restaurant_id, menu_id=i.id)}}">Delete</a></br></br>
+		    	{% endif %}
+		    {% endfor %}
+
+		<h2>Beverages</h2>
+			{% for i in items %}
+				{% if i.course == 'Beverage' %}
+					{{i.name}}<br>
+		    		{{i.description}}<br>
+		    		{{i.price}}<br>
+		    		<a href= "{{ url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=i.id)}}">Edit</a></br>
+					<a href= "{{ url_for('deleteMenuItem', restaurant_id=restaurant_id, menu_id=i.id)}}">Delete</a></br></br>
+		    	{% endif %}
+		    {% endfor %}
+		</div>
+	</body>
+</html>

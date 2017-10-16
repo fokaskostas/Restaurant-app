@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.css') }}">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/styles.css') }}">
+		<script src="{{ url_for('static', filename='js/jquery-3.2.1.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1 class="title-super text-uppercase">Restaurants</h1>
+					<h3>Create a list with your favorite restaurants</h3>
+				</div>
+			</div>
+
+			<div class="row">
+            	<div class="col-md-12">
+          			<hr>
+        		</div>
+      		</div>
+
+      		<div class="row">
+            	<div class="col-md-12">
+          			<img class= "img-responsive" src="{{ url_for('static', filename='images/1.jpg') }}" alt="Main Image"></br>
+        		</div>
+      		</div>
+
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<ul>
+			{% for message in messages %}
+			<li><strong>{{message}}</strong></li>
+			{% endfor %}
+			</ul>
+			{% endif %}
+			{% endwith %}
+
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<a href="{{ url_for('newRestaurant') }}"><h2 class="text-thin">Create New Restaurant</h2></a></br></br>
+				</div>
+			</div>
+
+			{% for restaurant in restaurants %}
+
+			<div class="row">
+				<div class="col-md-12 text-center title-super">
+					<a href="{{ url_for('showMenu', restaurant_id = restaurant.id) }}">{{restaurant.name}}</a></br>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<a href= "{{ url_for('editRestaurant', restaurant_id = restaurant.id) }}"><h5 class="text-thin">Edit</h5></a>
+					<a href= "{{ url_for('deleteRestaurant', restaurant_id = restaurant.id) }}"><h5 class="text-thin">Delete</h5></a>
+				</div>
+
+
+			{% endfor %}
+		</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
